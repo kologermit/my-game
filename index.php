@@ -41,19 +41,26 @@
       <tr style="height: 60%;">
         <td class="right_shadow">
           <input class="nes-input is-warning" placeholder="Жёлтые" id="first" oninput="div_none_first_name.hide();">
-          <div style="display: none;" id="none_first_name">Здесь не заполнено!</div>
+          <div style="display: none;" id="none_first_name" class="nes-text is-error">Здесь не заполнено!</div>
         </td>
         <td style="margin: 1em auto; padding: 1em;">
           <input class="nes-input is-error" placeholder="Красные" id="second" oninput="div_none_second_name.hide();">
-          <div style="display: none;" id="none_second_name">Здесь не заполнено!</div>
+          <div style="display: none;" class="nes-text is-error" id="none_second_name">Здесь не заполнено!</div>
         </td>
       </tr>
       <tr>
         <td colspan="2"><button class="nes-btn is-success" style="font-size: 140%; width: 50%; height: 50%;" id="next">Далее</button></td>
       </tr>
     </table>
-    <table align="center" style="display: none; width: 60%; height: 70%;" id="choose_theme">
-      <tr><td></td></tr>
+    <table align="center" style="display: none; width: 60%; height: 70%;" id="select_theme">
+      <tr>
+        <td style="text-align: center; font-size: 110%;">Выбери тему для игры!</td>
+      </tr>
+      <tr><td id="select" class="nes-select"><select></select></td></tr>
+      <tr hidden><td class="nes-text is-error">Не выбрана тема!</td></tr>
+      <tr><td><button class="nes-btn is-success" style="font-size: 140%; width: 30%; height: 30%;" id="next">Начать игру!</button></td></tr>
+    </table>
+    <table class="nes-table is-bordered is-dark" style="display: none;" id="game">
     </table>
   </body>
   <script type="text/javascript" src="script.js"></script>
