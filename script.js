@@ -16,6 +16,16 @@ var select_theme = $("table#select_theme select");
 var themes = []
 var theme_id = -1;
 var button_next_select_theme = $("table#select_theme button#next");
+var table_game = $("table#game");
+var answer = [];
+var dialog_question = $("dialog#question");
+var first_team_score = 0;
+var second_team_score = 0;
+var div_team_score = $("div#team_scores");
+var team_first = $("div#team_scores div#first team");
+var score_first = $("div#team_scores div#first score");
+var team_second = $("div#team_scores div#second team");
+var score_second = $("div#team_scores div#second score");
 
 button_manual.click(function() {
   dialog_manual.show();
@@ -26,7 +36,7 @@ button_manual_close.click(function() {
 });
 
 button_start.click(function() {
-  table_main.hide();
+  table_main.remove();
   table_commands_name.show();
 });
 
@@ -42,7 +52,7 @@ button_next_name_command.click(function(a) {
   if (first_name == "" || second_name == "") {
     return 0;
   };
-  table_commands_name.hide();
+  table_commands_name.remove();
   $.ajax({
     "url": "themes.php",
     "success": function(answer) {
@@ -56,19 +66,79 @@ button_next_name_command.click(function(a) {
     }
   });
 });
-
+var a = 0;
 button_next_select_theme.click(function() {
   theme_id = Number(select_theme.val());
-  table_select_theme.hide();
+  table_select_theme.remove();
+  table_game.show();
+  div_team_score.show();
+  team_first.html(first_name);
+  team_second.html(second_name);
   $.ajax({
     "url": "themes.php",
     "method": "GET",
     "data": {
       "id": theme_id
     },
-    "success": function(answer) {
-      answer = JSON.parse(answer);
-      console.log(answer);
+    "success": function(ans) {
+      answer = JSON.parse(ans)[0]["data"];
+      table = "";
+      height = 0;
+      width = 1;
+      for (var i in answer) {
+        table += "<tr><td class=\"theme\">" + i + "</td>";
+        height++;
+        width = 0;
+        for (var j in answer[i]) {
+          table += "<td><button class=\"nes-btn is-success\" style=\"width: 90%; height: 90%;\" value=\"" + j + "\" theme=\"" + i + "\">" + j + "</td>";
+          width++;
+        };
+        table += "</tr>";
+      };
+      table_game.html(table);
+      $("table#game tr").css("height", String(100 / height) + "%");
+      $("table#game td#theme").css("width", String(100 / (width + 1) * 2) + "%");
+      $("table#game button").click(button_question);
     }
   });
 });
+
+var button_answer = function() {
+  let team = $(this).attr("id");
+  let value = Number($(this).attr("value"));
+  if (team == "first") {
+    first_team_score += value;
+    score_first.empty();
+    score_first.html(String(first_team_score));
+  }
+  else {
+    second_team_score += value;
+    console.log(second_team_score);
+    score_second.empty();
+    score_second.html(String(second_team_score));
+  };
+  dialog_question.hide();
+};
+
+var button_question = function() {
+  let value = $(this).attr("value");
+  let theme = $(this).attr("theme");
+  $(this).after(value);
+  $(this).remove();
+  dialog_question.empty();
+  let html = "<div class=\"nes-text\">" + theme + ": " + value + " баллов</div><div>" + answer[theme][value].question + 
+  "</div><button id=\"answer\" class=\"nes-btn is-primary\">Ответ</button><div id=\"answer\" style=\"display: none;\">" + answer[theme][value].answer + "</div><button value=\"" + value + "\" id=\"first\" class=\"nes-btn is-warning\" style=\"width: 30%; display: none;\">" + first_name + "</button>" +
+  "<button value=\"" + value + "\" id=\"second\" style=\"width: 30%; display: none;\" class=\"nes-btn is-error\">" + second_name + "</button><button id=\"close\" class=\"nes-btn is-primary\" style=\"display: none;\">Закрыть</button>";
+  dialog_question.html(html);
+  $("dialog#question button#answer").click(function() {
+    $("dialog#question div#answer").show();
+    $("dialog#question button#close").show();
+    $("dialog#question button#first").show();
+    $("dialog#question button#second").show();
+    $(this).remove();
+  });
+  $("dialog#question button#close").click(function() {dialog_question.hide();});
+  $("dialog#question button#first").click(button_answer);
+  $("dialog#question button#second").click(button_answer);
+  dialog_question.show();
+};

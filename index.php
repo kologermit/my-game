@@ -7,7 +7,7 @@
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
   </head>
   <body>
-    <header>
+    <header style="z-index: 1;">
       <table class="header">
         <tr>
           <td style="width: 15%;" class="title">СВОЯ</td>
@@ -23,11 +23,11 @@
           <td style="width: 5%"><a href="mailto:kologermit@gmail.com"><i class="nes-icon google is-medium"></i></a></td>
         </tr>
       </table>
-      <dialog id="manual" class="nes-dialog is-rounded">
+      <dialog id="manual" class="nes-dialog is-rounded" style="z-index: 2;">
         <ul>
           <li></li>
         </ul>
-        <button class="nes-btn" id="close">Закрыть</button>
+        <button class="nes-btn is-primary" id="close">Закрыть</button>
       </dialog>
     </header>
     <table align="center" style="width: 60%; height: 50%;" id="main">
@@ -52,6 +52,7 @@
         <td colspan="2"><button class="nes-btn is-success" style="font-size: 140%; width: 50%; height: 50%;" id="next">Далее</button></td>
       </tr>
     </table>
+    <dialog id="question" class="nes-dialog is-rounded" style="z-index: 2; width: 60%;"></dialog>
     <table align="center" style="display: none; width: 60%; height: 70%;" id="select_theme">
       <tr>
         <td style="text-align: center; font-size: 110%;">Выбери тему для игры!</td>
@@ -60,8 +61,12 @@
       <tr hidden><td class="nes-text is-error">Не выбрана тема!</td></tr>
       <tr><td><button class="nes-btn is-success" style="font-size: 140%; width: 30%; height: 30%;" id="next">Начать игру!</button></td></tr>
     </table>
-    <table class="nes-table is-bordered is-dark" style="display: none;" id="game">
+    <table border="4" align="center" style="display: none; width: 60%; height: 70%; text-align: center;" id="game">
     </table>
+    <div id="team_scores" style="display: none; width: 60%" align="center" class="is-dark">
+      <div id="first" class="nes-text is-warning">Команда <team></team>: <score>0</score> баллов</div>
+      <div id="second" class="nes-text is-error">Команда <team></team>: <score>0</score> баллов</div>
+    </div>
   </body>
   <script type="text/javascript" src="script.js"></script>
 </html>
