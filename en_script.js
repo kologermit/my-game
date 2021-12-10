@@ -7,8 +7,8 @@ var table_commands_name = $("table#commands_name");
 var input_name_first_command = $("table#commands_name input#first");
 var input_name_second_command = $("table#commands_name input#second");
 var button_next_name_command = $("table#commands_name button#next");
-var first_name = "Жёлтые";
-var second_name  = "Красные";
+var first_name = "Yellow";
+var second_name  = "Red";
 var div_none_first_name = $("div#none_first_name");
 var div_none_second_name = $("div#none_second_name");
 var table_select_theme = $("table#select_theme");
@@ -123,15 +123,15 @@ var button_answer = function() {
     table_game.remove();
     if (first_team_score == second_team_score) {
       div_winner.addClass("is-primary");
-      div_winner.html("Дружеская ничья!");
+      div_winner.html("A friendly draw!");
     }
     else if (first_team_score > second_team_score) {
       div_winner.addClass("is-warning");
-      div_winner.html("Выиграла команда " + first_name + "!");
+      div_winner.html("The " + first_name + " team won!");
     }
     else {
       div_winner.addClass("is-error");
-      div_winner.html("Выиграла команда " + second_name + "!");
+      div_winner.html("The " + second_name + " team won!");
     }
   };
 };
@@ -142,9 +142,9 @@ var button_question = function() {
   $(this).after(value);
   $(this).remove();
   dialog_question.empty();
-  let html = "<div class=\"nes-text\">" + theme + ": " + value + " баллов</div><div>" + answer[theme][value].question + 
-  "</div><button id=\"answer\" class=\"nes-btn is-primary\">Ответ</button><div id=\"answer\" style=\"display: none;\">" + answer[theme][value].answer + "</div><button value=\"" + value + "\" id=\"first\" class=\"nes-btn is-warning\" style=\"width: 30%; display: none;\">" + first_name + "</button>" +
-  "<button value=\"" + value + "\" id=\"second\" style=\"width: 30%; display: none;\" class=\"nes-btn is-error\">" + second_name + "</button><button id=\"close\" class=\"nes-btn is-primary\" style=\"display: none;\">Закрыть</button>";
+  let html = "<div class=\"nes-text\">" + theme + ": " + value + " points</div><div>" + answer[theme][value].question + 
+  "</div><button id=\"answer\" class=\"nes-btn is-primary\">Answer</button><div id=\"answer\" style=\"display: none;\">" + answer[theme][value].answer + "</div><button value=\"" + value + "\" id=\"first\" class=\"nes-btn is-warning\" style=\"width: 30%; display: none;\">" + first_name + "</button>" +
+  "<button value=\"" + value + "\" id=\"second\" style=\"width: 30%; display: none;\" class=\"nes-btn is-error\">" + second_name + "</button><button id=\"close\" class=\"nes-btn is-primary\" style=\"display: none;\">Close</button>";
   dialog_question.html(html);
   $("dialog#question button#answer").click(function() {
     $("dialog#question div#answer").show();

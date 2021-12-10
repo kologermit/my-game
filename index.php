@@ -13,7 +13,7 @@
           <td style="width: 15%;" class="title">СВОЯ</td>
           <td style="width: 5%;"><a target="_blank" href="https://vk.com/kologermit"><i class="nes-icon vk is-medium"></i></a></td>
           <td style="width: 5%;"><a target="_blank" href="https://github.com/kologermit"><i class="nes-icon github is-medium"></i></a></td>
-          <td style="font-size: 180%; width: 20%" align="center" rowspan="2"><button type="button" class="nes-btn is-primary" id="manual">Инструкция</button></td>
+          <td style="font-size: 180%; width: 20%" align="center"><button type="button" class="nes-btn is-primary" id="manual">Инструкция</button></td>
           <td style="width: 60%;"></td>
         </tr>
         <tr class="lower_shadow">
@@ -21,6 +21,7 @@
           <!-- <td class="spacer"></td> -->
           <td style="width: 5%;"><a target="_blank" href="https://t.me/kologermit"><i class="nes-icon telegram is-medium"></i></a></td>
           <td style="width: 5%"><a href="mailto:kologermit@gmail.com"><i class="nes-icon google is-medium"></i></a></td>
+          <td style="width: 20%; font-size: 130%;"><a href="en.php" class="nes-text is-primary">Английская версия</a></td>
         </tr>
       </table>
       <dialog id="manual" class="nes-dialog is-rounded" style="z-index: 2;">
@@ -63,9 +64,10 @@
     </table>
     <table border="4" align="center" style="display: none; width: 60%; height: 70%; text-align: center;" id="game">
     </table>
-    <div id="team_scores" style="display: none; width: 60%" align="center" class="is-dark">
+    <div id="team_scores" style="display: none; text-align: center; font-size: 120%;" align="center">
       <div id="first" class="nes-text is-warning">Команда <team></team>: <score>0</score> баллов</div>
       <div id="second" class="nes-text is-error">Команда <team></team>: <score>0</score> баллов</div>
+      <div id="winner" class="nes-text" style="font-size: 150%;"></div>
     </div>
   </body>
   <script type="text/javascript" src="script.js"></script>
